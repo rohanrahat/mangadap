@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3 -W ignore::DeprecationWarning
+
+import shutup; shutup.please()
+import warnings
+warnings.filterwarnings('ignore', category=DeprecationWarning)
 
 import os
 import numpy
@@ -214,6 +218,9 @@ def fit_one_cube_muse(config_file, directory_path=None, analysis_path=None):
     #                    plate=plate, ifudesign=ifudesign, ebvgal=ebvgal)
     cube = MUSEDataCube.from_config(config_file)
     cube.mask[0,0,:] = True
+    # print(cube)
+    # print('IS THIS EVEN WORKING')
+    # exit()
 
 
     # Define how you want to analyze the data
@@ -238,12 +245,16 @@ def fit_one_cube_muse(config_file, directory_path=None, analysis_path=None):
 
 if __name__ == '__main__':
 
-    directory_path = '/Users/erickaguirre/mangadap/examples/'
+    # directory_path = '/Users/rohanr/Research/manga_DAP/MUSE_cube/'
+    directory_path = '/Users/rohanr/Research/manga_DAP/NGC1097/'     
     #directory_path = '/Users/erickaguirre/Desktop/SDSU_Research/Getting_used_to_MaNGA_DAP/'
-    cubefil = 'NGC0000.fits'
+
+    cubefil = 'NGC1097.fits'  
+    # cubefil = 'NGC0000.fits'
+
     #redshift = 0.008764
 
-    #sresfil = '/Users/rubin/Research/MUSE/gistwork/Tutorial/gistTutorial/configFiles/LSF-Config_MUSE_WFM'
+    # sresfil = '/Users/rohanr/Research/manga_DAP/NGC1097/LSF-Config_MUSE_WFM'
 
     # inclination = 35deg
     #ell = 0.0
@@ -254,16 +265,16 @@ if __name__ == '__main__':
     #objdec = -21.43893547
 
     # Need to make up plate and ifudesign numbers
-    plate = 100000
-    ifudesign = 1
+    # plate = 100000
+    # ifudesign = 1
     #ebvgal = 0.0
 
 
-    #config_file = '/Users/erickaguirre/Desktop/SDSU_Research/Getting_used_to_MaNGA_DAP/mangadap-100000-1-LINCUBE.ini'
-    config_file = '/Users/erickaguirre/Desktop/SDSU_Research/Getting_used_to_MaNGA_DAP/mangadap-100000-1-LINCUBE.ini'
+    # config_file = '/Users/rohanr/Research/manga_DAP/MUSE_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube 
+    config_file = '/Users/rohanr/Research/manga_DAP/NGC1097/mangadap-100000-5-LINCUBE_MAD.ini' # For 1097.fits
 
 
-    #test_read_muse(cubefil, sresfil, directory_path=directory_path, analysis_path='./output',
+    # test_read_muse(cubefil, sresfil, directory_path=directory_path, analysis_path='./output',
     #                  redshift=redshift, objra=objra, objdec=objdec, vdisp=vdisp, ellipticity=ell, pa=pa, reff=reff)
 
     # Need to add OBJRA and OBJDEC to prihdr -- issues with centering
@@ -280,8 +291,8 @@ if __name__ == '__main__':
     #                  ellipticity=ell, pa=pa, reff=reff, plate=plate, ifudesign=ifudesign,
     #                  ebvgal=ebvgal)
 
-    fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_test_mycode')
-    #fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_NGC4790')
+    fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_NGC1097')
+    # fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_MUSE_testcube')
 
     # Run QA -- note that these plate-ifu numbers do not match those in new config file
 
@@ -289,14 +300,17 @@ if __name__ == '__main__':
     #daptype = 'SQUARE0.6-MILESHC-MASTARSSP'
     dapver='2.2.3dev'
     drpver ='v3_0_1'
-    maps_file = '/Users/erickaguirre/mangadap/examples/output2.0_test/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
-    model_file = '/Users/erickaguirre/mangadap/examples/output2.0_test/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
+    # maps_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
+    # model_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
 
-    #spotcheck_images('./outputVOR_test_OGcode', daptype, plate, ifudesign, ofile=None, drpver=None, dapver=None)
+    maps_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_NGC1097/SQUARE2.0-MILESHC-MASTARSSP/100000/5/manga-100000-5-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
+    model_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_NGC1097/SQUARE2.0-MILESHC-MASTARSSP/100000/5/manga-100000-5-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
 
+    # spotcheck_images('./outputVOR_NGC1097', daptype, plate, ifudesign, ofile=None, drpver=None, dapver=None)
+    # spotcheck_images('./output2.0_MUSE_testcube', daptype, plate, ifudesign, ofile=None, drpver=None, dapver=None)
     plan = AnalysisPlanSet([AnalysisPlan(drpqa_key='SNRG',
                                          drpqa_clobber=False,
-                                         bin_key='VOR10',  # 'HYB10', # 'VOR10', # 'SQUARE2.0'
+                                         bin_key='SQUARE2.0',  # 'HYB10', # 'VOR10', # 'SQUARE2.0'
                                          bin_clobber=False,
                                          continuum_key='MILESHCMPL11',
                                          continuum_clobber=False,
@@ -305,13 +319,13 @@ if __name__ == '__main__':
                                          elfit_key='EFITMPL11SSP',  # 'EFITMPL9DB',
                                          spindex_key='INDXEN')])
 
-    #redux_path = '/Users/erickaguirre/mangadap/examples/test_cube/'
-    #ppxffit_qa_plot(plate, ifudesign, plan, drpver=drpver, redux_path=redux_path, dapver=dapver, analysis_path='./output2.0_test',
-                    #tpl_flux_renorm=None,cubefile=cubefil)
+    # redux_path = '/Users/rohanr/Research/manga_DAP/mangadap/examples/'
+    # ppxffit_qa_plot(plate, ifudesign, plan, drpver=drpver, redux_path=redux_path, dapver=dapver, analysis_path='./output2.0_MUSE_testcube',
+    #                 tpl_flux_renorm=None)
 
     # Need to make up plate and ifudesign numbers
-    plate = 1
-    ifudesign = 1
+    # plate = 1
+    # ifudesign = 1
 
-    #fit_residuals_muse(dapver, './output2.0_NGC4030', daptype, plate, ifudesign)
+    # fit_residuals_muse(dapver, './output2.0_MUSE_testcube', daptype, plate, ifudesign)
     #manga_dap_inspector(maps_file, model_file, ext=None, masked_spectra=True)

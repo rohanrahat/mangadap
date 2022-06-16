@@ -19,6 +19,9 @@ from pydl.pydlutils.yanny import yanny
 
 from .parset import KeywordParSet, ParDatabase
 
+import warnings
+warnings.filterwarnings(action ='ignore', category=DeprecationWarning)
+
 class AnalysisPlan(KeywordParSet):
     """
     Generic class to handle MaNGA DAP analysis plans.
