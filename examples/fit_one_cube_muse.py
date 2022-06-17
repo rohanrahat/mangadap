@@ -272,7 +272,7 @@ if __name__ == '__main__':
 
 
     # config_file = '/Users/rohanr/Research/manga_DAP/MUSE_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube 
-    config file = '/data/shared/MUSE-NaI/datacubes/test_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube in rainbow
+    config_file = '/data/shared/MUSE-NaI/datacubes/test_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube in rainbow
     # config_file = '/Users/rohanr/Research/manga_DAP/NGC1097/mangadap-100000-5-LINCUBE_MAD.ini' # For 1097.fits
 
 
