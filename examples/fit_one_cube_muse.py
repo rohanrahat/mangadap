@@ -218,6 +218,7 @@ def fit_one_cube_muse(config_file, directory_path=None, analysis_path=None):
     #                    plate=plate, ifudesign=ifudesign, ebvgal=ebvgal)
     cube = MUSEDataCube.from_config(config_file)
     cube.mask[0,0,:] = True
+    # embed()
     # print(cube)
     # print('IS THIS EVEN WORKING')
     # exit()
@@ -225,17 +226,17 @@ def fit_one_cube_muse(config_file, directory_path=None, analysis_path=None):
 
     # Define how you want to analyze the data
     plan = AnalysisPlanSet([ AnalysisPlan(drpqa_key='SNRG',
-                                          drpqa_clobber=False,
+                                          drpqa_clobber=True,
                                           bin_key='SQUARE2.0', #HYB10', #SQUARE2.0
-                                          bin_clobber=False,
+                                          bin_clobber=True,
                                           continuum_key='MILESHCMPL11',
-                                          continuum_clobber=False,
+                                          continuum_clobber=True,
                                           elmom_key='EMOMMPL11',
-                                          elmom_clobber=False,
+                                          elmom_clobber=True,
                                           elfit_key='EFITMPL11SSP', #'EFITMPL9DB',
-                                          elfit_clobber=False,
+                                          elfit_clobber=True,
                                           spindex_key='INDXEN',
-                                          spindex_clobber=False) ])
+                                          spindex_clobber=True) ])
 
     # Run it!
     return manga_dap(cube, plan, verbose=2, directory_path=directory_path,
@@ -246,16 +247,16 @@ def fit_one_cube_muse(config_file, directory_path=None, analysis_path=None):
 if __name__ == '__main__':
 
     # directory_path = '/Users/rohanr/Research/manga_DAP/MUSE_cube/'
-    directory_path = '/data/shared/MUSE-NaI/datacubes/test_cube/'  # rainbow path 
-    # directory_path = '/Users/rohanr/Research/manga_DAP/NGC1097/'     
+    # directory_path = '/data/shared/MUSE-NaI/datacubes/test_cube/'  # rainbow path 
+    directory_path = '/Users/rohanr/Research/manga_DAP/NGC1097/'
     #directory_path = '/Users/erickaguirre/Desktop/SDSU_Research/Getting_used_to_MaNGA_DAP/'
 
-    # cubefil = 'NGC1097.fits'  
-    cubefil = 'NGC0000.fits'
+    cubefil = 'NGC1097.fits'
+    # cubefil = 'NGC0000.fits'
 
     #redshift = 0.008764
 
-    # sresfil = '/Users/rohanr/Research/manga_DAP/NGC1097/LSF-Config_MUSE_WFM'
+    sresfil = '/Users/rohanr/Research/manga_DAP/NGC1097/LSF-Config_MUSE_WFM'
 
     # inclination = 35deg
     #ell = 0.0
@@ -271,9 +272,9 @@ if __name__ == '__main__':
     #ebvgal = 0.0
 
 
-    # config_file = '/Users/rohanr/Research/manga_DAP/MUSE_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube 
-    config_file = '/data/shared/MUSE-NaI/datacubes/test_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube in rainbow
-    # config_file = '/Users/rohanr/Research/manga_DAP/NGC1097/mangadap-100000-5-LINCUBE_MAD.ini' # For 1097.fits
+    # config_file = '/Users/rohanr/Research/manga_DAP/MUSE_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube
+    # config_file = '/data/shared/MUSE-NaI/datacubes/test_cube/mangadap-100000-1-LINCUBE.ini'   # For testcube in rainbow
+    config_file = '/Users/rohanr/Research/manga_DAP/NGC1097/mangadap-100000-5-LINCUBE_MAD.ini' # For 1097.fits
 
 
     # test_read_muse(cubefil, sresfil, directory_path=directory_path, analysis_path='./output',
@@ -293,8 +294,8 @@ if __name__ == '__main__':
     #                  ellipticity=ell, pa=pa, reff=reff, plate=plate, ifudesign=ifudesign,
     #                  ebvgal=ebvgal)
 
-    # fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_NGC1097')
-    fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_MUSE_testcube')
+    fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_NGC1097')
+    # fit_one_cube_muse(config_file, directory_path=directory_path, analysis_path='./output2.0_MUSE_testcube')
 
     # Run QA -- note that these plate-ifu numbers do not match those in new config file
 
@@ -305,22 +306,22 @@ if __name__ == '__main__':
     # maps_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
     # model_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
 
-    maps_file = '/data/shared/MUSE-NaI/datacubes/test_cube/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
-    model_file = '/data/shared/MUSE-NaI/datacubes/test_cube/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
+    # maps_file = '/data/shared/MUSE-NaI/datacubes/test_cube/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
+    # model_file = '/data/shared/MUSE-NaI/datacubes/test_cube/output2.0_MUSE_testcube/SQUARE2.0-MILESHC-MASTARSSP/100000/1/manga-100000-1-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
 
-    # maps_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_NGC1097/SQUARE2.0-MILESHC-MASTARSSP/100000/5/manga-100000-5-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
-    # model_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_NGC1097/SQUARE2.0-MILESHC-MASTARSSP/100000/5/manga-100000-5-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
+    maps_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_NGC1097/SQUARE2.0-MILESHC-MASTARSSP/100000/5/manga-100000-5-MAPS-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
+    model_file = '/Users/rohanr/Research/manga_DAP/mangadap/examples/output2.0_NGC1097/SQUARE2.0-MILESHC-MASTARSSP/100000/5/manga-100000-5-LOGCUBE-SQUARE2.0-MILESHC-MASTARSSP.fits.gz'
 
     # spotcheck_images('./outputVOR_NGC1097', daptype, plate, ifudesign, ofile=None, drpver=None, dapver=None)
     # spotcheck_images('./output2.0_MUSE_testcube', daptype, plate, ifudesign, ofile=None, drpver=None, dapver=None)
     plan = AnalysisPlanSet([AnalysisPlan(drpqa_key='SNRG',
-                                         drpqa_clobber=False,
+                                         drpqa_clobber=True, # True
                                          bin_key='SQUARE2.0',  # 'HYB10', # 'VOR10', # 'SQUARE2.0'
-                                         bin_clobber=False,
+                                         bin_clobber=True,
                                          continuum_key='MILESHCMPL11',
-                                         continuum_clobber=False,
+                                         continuum_clobber=True,
                                          elmom_key='EMOMMPL11',
-                                         elmom_clobber=False,
+                                         elmom_clobber=True,
                                          elfit_key='EFITMPL11SSP',  # 'EFITMPL9DB',
                                          spindex_key='INDXEN')])
 

@@ -44,6 +44,7 @@ from .util import sample_growth, optimal_scale
 
 # For debugging
 from matplotlib import pyplot
+from IPython import embed
 #from ..contrib import ppxf_util
 
 class PPXFFitPar(KeywordParSet):
@@ -1004,8 +1005,8 @@ class PPXFFit(StellarKinematicsFit):
                 result[i] = PPXFFitResult(degree, mdegree, start[i], end[i], _tpl_to_use[i,:],
                                           None, ntpl)
                 continue
-
-            # Run ppxf
+            # embed()
+            # Run ppxf          - THIS RUNS ppxf.py 
             if plot:
                 pyplot.clf()
             result[i] = PPXFFitResult(degree, mdegree, start[i], end[i], _tpl_to_use[i,:],
@@ -1020,6 +1021,7 @@ class PPXFFit(StellarKinematicsFit):
                                       weight_errors=weight_errors)
 #                                      linear_method='lsqlin'), ntpl,
 #                                      weight_errors=weight_errors)
+
 
             if result[i].kin[1] < 0:
 #                result[i].kin[1] = numpy.absolute(result[i].kin[1]) #self.sigma_limits[0]

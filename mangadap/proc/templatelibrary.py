@@ -1212,7 +1212,10 @@ class TemplateLibrary:
             return None
         return os.path.join(self.directory_path, self.processed_file)
 
-    def read_raw_template_library(self, library_key=None, tpllib_list=None):
+    def read_raw_template_library(self, library_key=None, tpllib_list=None):    
+        
+        # CHECK FROM HERE for Number of Templates: 42#
+        
         """
         Read the identified template library.  If all the arguments are
         the default, the preset attributes from the initialization of

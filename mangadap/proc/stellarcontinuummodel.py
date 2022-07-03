@@ -495,6 +495,8 @@ class StellarContinuumModel:
             The template library prepared for fitting the binned
             spectra.
         """
+        # print('ECHO', resolution_fwhm)
+
         if resolution_fwhm is None:
             return TemplateLibrary(self.method['fitpar']['template_library_key'],
                                    velocity_offset=velocity_offset, cube=self.binned_spectra.cube,

@@ -27,6 +27,7 @@ from astropy.io import fits
 from astropy.wcs import WCS
 
 from pydl.goddard.astro import airtovac
+from sklearn.utils import resample
 from ..util import sampling
 
 from ..config import defaults
@@ -206,7 +207,11 @@ class MUSEDataCube(DataCube):
                 resampled_flux[:,spatial_index[i][0],spatial_index[i][1]][indx] = 0.0
                 resampled_error[:,spatial_index[i][0],spatial_index[i][1]][indx] = 1.0
                 resampled_mask[:,spatial_index[i][0],spatial_index[i][1]][indx] = True
-
+    
+            # embed()   # Check if this actually worked by doing: bool = numpy.ravel(numpy.isfinite(resampled_flux)); numpy.where(numpy.logical_not(bool))
+            resampled_flux[numpy.logical_not(numpy.isfinite(resampled_flux))] = 0.0
+            resampled_error[numpy.logical_not(numpy.isfinite(resampled_flux))] = 1.0
+            resampled_mask[numpy.logical_not(numpy.isfinite(resampled_flux))] = True 
 
             # Recreate ivar
             resampled_ivar = 1.0 / resampled_error**2

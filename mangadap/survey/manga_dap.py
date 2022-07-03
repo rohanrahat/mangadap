@@ -305,7 +305,7 @@ def manga_dap(cube, plan, dbg=False, log=None, verbose=0, drpver=None, redux_pat
                                         ell=metadata['ell'], analysis_path=_analysis_path,
                                         symlink_dir=method_ref_dir,
                                         clobber=plan['drpqa_clobber'][i], loggers=loggers)
-
+        # embed()
         #---------------------------------------------------------------
         # Spatial Binning: placed in the common/ directory
         #---------------------------------------------------------------
@@ -318,6 +318,7 @@ def manga_dap(cube, plan, dbg=False, log=None, verbose=0, drpver=None, redux_pat
         #---------------------------------------------------------------
         # Stellar Continuum Fit: placed in the common/ directory
         #---------------------------------------------------------------
+
         stellar_continuum = None if plan['continuum_key'][i] is None else \
                     StellarContinuumModel(plan['continuum_key'][i], binned_spectra,
                                           guess_vel=metadata['vel'], guess_sig=metadata['vdisp'],
